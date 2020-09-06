@@ -1,0 +1,3 @@
+{
+    "mongoURI": "mongodb+srv://todo_user:7KKiLplKDamDov6u@cluster0.bxrta.mongodb.net/DevConnector?retryWrites=true&w=majority"
+}
