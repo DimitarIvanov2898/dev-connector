@@ -4,7 +4,7 @@ const db = config.get('mongoURI')
 
 const connectDb = async () => {
     try{
-        await mongoose.connect(db, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true})
+        await mongoose.connect(db, {useUnifiedTopology: true, useFindAndModify: false, useNewUrlParser: true, useCreateIndex: true})
         
     }catch(err){
         console.log(err)
