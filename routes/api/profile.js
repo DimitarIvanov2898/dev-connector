@@ -200,6 +200,7 @@ router.put('/education', [auth,
         }
 
         try{
+            
             const profile = await Profile.findOne({user: req.user.id})
 
             profile.experience.unshift(newEdu)
@@ -207,6 +208,7 @@ router.put('/education', [auth,
 
             res.json(profile)
         }catch(error){
+            
             console.log(error.message)
             res.status(500).send('Server error')
         }
