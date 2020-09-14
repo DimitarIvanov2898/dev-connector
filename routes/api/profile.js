@@ -5,6 +5,7 @@ const router = express.Router()
 const auth = require('../../middleware/auth')
 const Profile = require('../../models/Profile')
 const User = require('../../models/User')
+const Post = require('../../models/Post')
 const {check, validationResult} = require('express-validator')
 const mongoose = require('mongoose');
 
@@ -113,8 +114,10 @@ router.get("/user/:user_id", async (req, res) => {
 //delete profile and user
 router.delete('/', auth, async (req, res) => {
     try{
+        await Post.deleteMany({user: req.user.id})
         await Profile.findOneAndRemove({user: req.user.id})
         await User.findOneAndRemove({_id: req.user.id})
+        
         res.json({msg: 'User deleted!'})
     }catch(err){
         console.log(err)
@@ -203,7 +206,7 @@ router.put('/education', [auth,
             
             const profile = await Profile.findOne({user: req.user.id})
 
-            profile.experience.unshift(newEdu)
+            profile.education.unshift(newEdu)
             await profile.save()
 
             res.json(profile)
@@ -215,7 +218,7 @@ router.put('/education', [auth,
 })
 
 //delete education from profile
-router.delete("/eduction/:edu_id", auth, async (req, res) => {
+router.delete("/education/:edu_id", auth, async (req, res) => {
     try{
         const profile = await Profile.findOne({user: req.user.id})
 
