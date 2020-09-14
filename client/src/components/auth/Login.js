@@ -32,7 +32,7 @@ const Login = ({login, isAuthenticated}) => {
     return (<Fragment>
         <section className="container">
       <h1 className="large text-primary">Sign In</h1>
-      <p className="lead"><i className="fas fa-user"></i> Login</p>
+      <p className="lead"><i className="fa fa-user"></i> Login</p>
       <form className="form" onSubmit={e => onSubmit(e)}>
         <div className="form-group">
           <input type="email" placeholder="Email Address" name="email" value={email} onChange={e => onChange(e)} />

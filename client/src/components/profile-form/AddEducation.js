@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {addEducation} from '../../actions/profile'
 
 const AddEducation = ({addEducation, history}) => {
-    console.log(history)
+    
     const [formData, setFormData] = useState({
         school: '',
         degree: '',
@@ -85,4 +85,4 @@ AddEducation.propTypes = {
     addEducation: PropTypes.func.isRequired,
 }
 
-export default connect(null, {addEducation})(AddEducation)
+export default connect(null, {addEducation})(withRouter(AddEducation))
