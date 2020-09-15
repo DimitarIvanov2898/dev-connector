@@ -5,7 +5,7 @@ import {GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE, ACCOUNT_DELETED, CLEAR_PROFI
 //get current user profile
 export const getCurrentProfile = () => async dispatch => {
     try{
-        const res = await axios.get('api/profile/me')
+        const res = await axios.get('/api/profile/me')
 
         dispatch({
             type: GET_PROFILE,
@@ -24,7 +24,7 @@ export const getProfiles = () => async dispatch => {
     dispatch({type: CLEAR_PROFILE})
 
     try{
-        const res = await axios.get('api/profile')
+        const res = await axios.get('/api/profile')
 
         dispatch({
             type: GET_PROFILES,
@@ -42,8 +42,8 @@ export const getProfiles = () => async dispatch => {
 export const getProfileById = userId => async dispatch => {
     
     try{
-        const res = await axios.get(`api/profile/user/${userId}`)
-
+        const res = await axios.get(`/api/profile/user/${userId}`)
+        console.log(res)
         dispatch({
             type: GET_PROFILE,
             payload: res.data
@@ -60,7 +60,7 @@ export const getProfileById = userId => async dispatch => {
 export const getGithubRepos = githubUsername => async dispatch => {
     
     try{
-        const res = await axios.get(`api/profile/github/${githubUsername}`)
+        const res = await axios.get(`/api/profile/github/${githubUsername}`)
 
         dispatch({
             type: GET_REPOS,
