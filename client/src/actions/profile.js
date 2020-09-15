@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {setAlert} from './alert'
-import {GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE, ACCOUNT_DELETED, CLEAR_PROFILE} from './types'
+import {GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE, ACCOUNT_DELETED, CLEAR_PROFILE, GET_PROFILES, GET_REPOS} from './types'
 
 //get current user profile
 export const getCurrentProfile = () => async dispatch => {
@@ -18,6 +18,62 @@ export const getCurrentProfile = () => async dispatch => {
         })
     }
 }
+
+//get all profiles
+export const getProfiles = () => async dispatch => {
+    dispatch({type: CLEAR_PROFILE})
+
+    try{
+        const res = await axios.get('api/profile')
+
+        dispatch({
+            type: GET_PROFILES,
+            payload: res.data
+        })
+    }catch(err){
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
+//get all profiles
+export const getProfileById = userId => async dispatch => {
+    
+    try{
+        const res = await axios.get(`api/profile/user/${userId}`)
+
+        dispatch({
+            type: GET_PROFILE,
+            payload: res.data
+        })
+    }catch(err){
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
+//get github repos
+export const getGithubRepos = githubUsername => async dispatch => {
+    
+    try{
+        const res = await axios.get(`api/profile/github/${githubUsername}`)
+
+        dispatch({
+            type: GET_REPOS,
+            payload: res.data
+        })
+    }catch(err){
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        })
+    }
+}
+
 
 //create or update profile
 export const createProfile = (formData, history, edit = false) => async dispatch => {
@@ -165,7 +221,7 @@ export const deleteAccount = () => async dispatch => {
 
     }
     try{
-        const res = await axios.delete(`/api/profile/`)
+        await axios.delete(`/api/profile/`)
 
         dispatch({
             type: CLEAR_PROFILE
