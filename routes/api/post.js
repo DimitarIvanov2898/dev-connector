@@ -45,7 +45,10 @@ router.get('/', auth, async (req, res) => {
 
 //get post by id
 router.get('/:id', auth, async (req, res) => {
+    
+    console.log('ssss')
     try{
+        
         const post = await Post.findById(req.params.id)
         if(!post){
             return res.status(404).json({msg: 'There is no such post!'})

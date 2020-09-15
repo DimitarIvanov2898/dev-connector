@@ -11,6 +11,7 @@ import ProfileGithub from './ProfileGithub'
 import {getProfileById} from '../../actions/profile'
 
 const Profile = ({getProfileById, profile: {profile, loading},auth, match}) => {
+    console.log(match)
     useEffect(() => {
         getProfileById(match.params.id)
     },[getProfileById])
